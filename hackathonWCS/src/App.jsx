@@ -9,10 +9,11 @@ import reactLogo from "./assets/react.svg";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [city, setCity] = useState("");
+  const [cityList, setCityList] = useState([]);
 
   return (
-    <DataContext.Provider value={{ data, isLoading, setYear, year }}>
+    <DataContext.Provider value={{ city, cityList}}>
       <BrowserRouter>
         <header className="w-full">
           <Header />
@@ -28,7 +29,7 @@ function App() {
           <Footer />
         </footer>
       </BrowserRouter>
-    </DataContext.Provider>
+      </DataContext.Provider>
   );
 }
 

@@ -3,7 +3,7 @@ import logoWcs from '../assets/wcs.png';
 
 function Footer() {
   return (
-    <div fullName="w-full h-[15vh]">
+    <div className="w-full h-[15vh]">
       <div>
         <img src={logoWcs} alt="logo wcs" />
          <p>2022</p>
