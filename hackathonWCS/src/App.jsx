@@ -1,4 +1,9 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route, matchPath, useLocation } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Favorite from "./pages/Favorite";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 
@@ -8,7 +13,7 @@ function App() {
   return (
     <BrowserRouter>
       <header className="w-full">
-        <NavBar />
+        <Header />
       </header>
       <main className="">
         <Routes>
