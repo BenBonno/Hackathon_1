@@ -19,8 +19,16 @@ route.get('/Country/:id', (req, res) => {
 
 route.get('/Region/:id', (req, res) => {
     const RegionID = req.params.id;
+    console.log(req.query)
+    const Offset = parseInt(req.query.Offset) ||0;
+    const Limit = parseInt(req.query.Limit) ||0;
     GetRegionById(RegionID).then((response) => {
-        res.send(response)
+        if(Limit){
+            res.send(response.slice(Offset,Offset+Limit))
+        }else{
+            res.send(response)
+        }
+        
 
     }).catch(() => {
         res.status(404).json({ Error: 'No Region as this ID' })
@@ -87,6 +95,8 @@ route.get('/City/:name', PaysQuery, (req, res) => {
                         }
             })
 
+    }).catch(()=>{
+        res.status(404).json({ Error: 'No City as this Name' })
     })
 })
 
