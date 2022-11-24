@@ -1,25 +1,30 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route, matchPath, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  matchPath,
+  useLocation,
+} from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import Favorite from "./pages/Favorite";
-import reactLogo from "./assets/react.svg";
+import Details from "./pages/Details";
+import MyList from "./pages/MyList";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <BrowserRouter>
-      <header className="w-full">
+      <header className="w-full fixed top-0 left-0 right-0 z-50">
         <Header />
       </header>
       <main className="">
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/home" exact element={<Home />} />
-          <Route path="/favorite" exact element={<Favorite />} />
+          <Route path="/:id" exact element={<Details />} />
+          <Route path="/list" exact element={<MyList />} />
         </Routes>
       </main>
       <footer className="">

@@ -5,6 +5,9 @@ module.exports = {
     extend: {
       backgroundImage: {
         "ocean-theme": "url('/src/assets/bg-footer.jpg')",
+        "home-theme": "url('/src/assets/bg-home-section.jpg')",
+        "cadre-detail": "url('/src/assets/cadre-img-detail.png')",
+        "section-theme": "url('/src/assets/bg-section-to-page.webp')",
       },
       colors: {
         /* btn color */
