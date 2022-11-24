@@ -1,14 +1,14 @@
-import React from 'react';
-import logoWcs from '../assets/wcs.png';
+import React from "react";
+import logoWcs from "../assets/wcs.png";
 
 function Footer() {
   return (
-    <div fullName="w-full h-[15vh]">
+    <div className="w-full h-fit bg-ocean-theme bg-cover bg-center bg-no-repeat">
       <div>
         <img src={logoWcs} alt="logo wcs" />
-         <p>2022</p>
-        </div>
-      <div>
+        <p>2022</p>
+      </div>
+      <div className="bg-red-500">
         <p>Benoit</p>
         <p>Thomas</p>
         <p>Dimitri</p>
