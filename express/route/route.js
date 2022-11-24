@@ -3,7 +3,9 @@ const cors = require('cors');
 
 
 const route = express()
-route.use(cors())
+route.use(cors({
+    origin: '*'
+}))
 const { GetCountryById, GetRegionById, GetCityByName } = require('../Service/database')
 
 
