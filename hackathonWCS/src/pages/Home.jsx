@@ -4,7 +4,7 @@ import Search from "../components/Search";
 
 function Home() {
   return (
-    <div>
+    <div className='w-full h-[70vh]'>
       <Search />
     </div>
   );
