@@ -1,6 +1,6 @@
 const express = require('express')
 const route = express()
-const { db, GetCountryById, GetRegionById, GetCityByName } = require('../Service/database')
+const { GetCountryById, GetRegionById, GetCityByName } = require('../Service/database')
 
 
 route.get('/', (req, res) => {
@@ -27,6 +27,9 @@ route.get('/Region/:id', (req, res) => {
     })
 })
 
+//
+
+
 function PaysQuery(req, res, next) {
     if (req.query.Pays) {
         GetCityByName(req.params.name)
@@ -47,7 +50,14 @@ function PaysQuery(req, res, next) {
                     })
                 )
                     .then((data) => {
-                        res.send(data.filter(item => item))
+                        const Offset = parseInt(req.query.Offset)||0
+                        const result = data.filter(item => item)
+                        if(parseInt(req.query.Limit) >= result.length || req.query.Limit === undefined){
+                            res.send(result)
+                        }else{
+                            res.send(result.slice(Offset,Offset+parseInt(req.query.Limit)))
+                        }
+                        
                     })
                     .catch((e) => {
                         console.log(e)
@@ -59,6 +69,7 @@ function PaysQuery(req, res, next) {
     }
 }
 route.get('/City/:name', PaysQuery, (req, res) => {
+    console.log(req.query)
     GetCityByName(req.params.name).then(async (response) => {
         Promise.all(
             response.map(async (City) => {
@@ -67,7 +78,13 @@ route.get('/City/:name', PaysQuery, (req, res) => {
             })
         )
             .then((data) => {
-                res.send(data)
+                const Offset = parseInt(req.query.Offset)||0
+                const result = data.filter(item => item)
+                        if(parseInt(req.query.Limit) >= result.length || req.query.Limit === undefined){
+                            res.send(result)
+                        }else{
+                            res.send(result.slice(Offset,Offset+parseInt(req.query.Limit)))
+                        }
             })
 
     })
