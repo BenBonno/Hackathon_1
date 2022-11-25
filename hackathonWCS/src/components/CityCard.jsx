@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Rating from "./Rating";
 import ThumbLogo from "../assets/trombone.svg";
 import Modal from "../components/Modal";
+import axios from "axios";
 
 function CityCard() {
   useEffect(() => {}, []);
