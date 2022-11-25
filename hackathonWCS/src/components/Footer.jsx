@@ -16,7 +16,7 @@ function Footer() {
       <section className="w-full py-2 flex flex-wrap justify-between">
         <img className="w-20 my-2 ml-8" src={logoWcs} alt="logo wcs" />
         <p className="text-sm mr-8 text-white font-medium">
-          Copyright © 2022 CheckOo.
+          Copyright © 2022 CheckOo
         </p>
       </section>
     </div>
