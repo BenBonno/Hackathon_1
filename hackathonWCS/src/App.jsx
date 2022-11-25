@@ -16,7 +16,7 @@ import "./App.css";
 function App() {
   const [city, setCity] = useState("");
   const [cityList, setCityList] = useState([]);
-
+  console.log(cityList);
   return (
     <DataContext.Provider value={{ city, cityList, setCityList }}>
       <BrowserRouter>
@@ -30,7 +30,7 @@ function App() {
             <Route path="/list" exact element={<MyList />} />
           </Routes>
         </main>
-        {cityList && JSON.stringify(cityList)}
+        {/*cityList && JSON.stringify(cityList)*/}
         <footer className="">
           <Footer />
         </footer>
