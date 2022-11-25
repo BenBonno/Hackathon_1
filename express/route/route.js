@@ -122,37 +122,7 @@ function PaysQuery(req, res, next) {
 route.get('/City/:name', PaysQuery, (req, res) => {
     console.log(req.params.name, req.query)
     GetCityByName(req.params.name).then(async (response) => {
-        Promise.all(
-            response.map(async (City) => {
-                try {
-                    const Country = await GetCountryById(City.CountryID)
-                    const Region = await GetNameOfRegion(City.RegionID)
-                    return { CountryName: Country[0].Country, RegionName: Region[0].Region, ...City }
-                } catch (error) {
-                    const Country = await GetCountryById(City.CountryID)
-                    return { CountryName: Country[0].Country, ...City }
-                }
-            })
-        )
-            .then((data) => {
-                const Offset = parseInt(req.query.Offset) || 0
-                const result = data.filter(item => item)
-                if (parseInt(req.query.Limit) >= result.length || req.query.Limit === undefined) {
-                    res.send(result)
-                } else {
-                    res.send(result.slice(Offset, Offset + parseInt(req.query.Limit)))
-                }
-            })
-
-    }).catch(() => {
-        res.status(404).json({ Error: 'No City as this Name' })
-    })
-}
-
-)
-route.get('/CityById/:id', (req, res) => {
-    GetCityById(req.params.id).then(async (response) => {
-        if (req.query.Region) {
+        if (req.query.Region == "True") {
             Promise.all(
                 response.map(async (City) => {
                     try {
@@ -167,7 +137,7 @@ route.get('/CityById/:id', (req, res) => {
                             return { ...el,Distance }
                         })
 
-                        return { City: { CountryName: Country[0].Country, RegionName: Region[0].Region}, Region: RegionResult }
+                        return { City: { CountryName: Country[0].Country, RegionName: Region[0].Region,...City}, Region: RegionResult }
                     } catch (error) {
                         const Country = await GetCountryById(City.CountryID)
                         return { City: { CountryName: Country[0].Country, ...City }, Region: [] }
@@ -194,22 +164,91 @@ route.get('/CityById/:id', (req, res) => {
                     try {
                         const Country = await GetCountryById(City.CountryID)
                         const Region = await GetNameOfRegion(City.RegionID)
-                        return { CountryName: Country[0].Country, RegionName: Region[0].Region, ...City }
+
+                        return { City: { CountryName: Country[0].Country, RegionName: Region[0].Region,...City} }
                     } catch (error) {
                         const Country = await GetCountryById(City.CountryID)
-                        return { CountryName: Country[0].Country, ...City }
+                        return { City: { CountryName: Country[0].Country, ...City }, Region: [] }
+                    }
+                })
+            )
+            .then((data) => {
+                console.log(req.query)
+                const Offset = parseInt(req.query.Offset) || 0
+                const result = data.filter(item => item)
+                const City = result[0].City
+                res.send({ City })
+            })
+        }
+
+    }).catch(() => {
+        res.status(404).json({ Error: 'No City as this Name' })
+    })
+}
+
+)
+route.get('/CityById/:id', (req, res) => {
+    GetCityById(req.params.id).then(async (response) => {
+        if (req.query.Region) {
+            Promise.all(
+                response.map(async (City) => {
+                    try {
+                        const Country = await GetCountryById(City.CountryID)
+                        const Region = await GetNameOfRegion(City.RegionID)
+                        const RegionArray = await GetRegionById(City.RegionID)
+                        const RegionResult = RegionArray.map((el) => {
+                            const Distance = GetDistance(
+                                { PointA_lat: City.Latitude, PointA_Lgn: City.Longitude }, 
+                                { PointB_lat: el.Latitude, PointB_Lgn: el.Longitude })
+
+                            return { ...el,Distance }
+                        })
+
+                        return { City: { CountryName: Country[0].Country, RegionName: Region[0].Region,...City}, Region: RegionResult }
+                    } catch (error) {
+                        const Country = await GetCountryById(City.CountryID)
+                        return { City: { CountryName: Country[0].Country, ...City }, Region: [] }
                     }
                 })
             )
                 .then((data) => {
+                    console.log(req.query)
                     const Offset = parseInt(req.query.Offset) || 0
                     const result = data.filter(item => item)
-                    if (parseInt(req.query.Limit) >= result.length || req.query.Limit === undefined) {
-                        res.send(result)
+                    const City = result[0].City
+                    const Region = result[0].Region
+                    console.log(Region.length)
+                    if (parseInt(req.query.Limit) >= Region.length || req.query.Limit === undefined) {
+                        res.send({ City, Region })
                     } else {
-                        res.send(result.slice(Offset, Offset + parseInt(req.query.Limit)))
+
+                        res.send({ City, Region: Region.slice(Offset, Offset + parseInt(req.query.Limit)) })
                     }
                 })
+        } else {
+            Promise.all(
+                response.map(async (City) => {
+                    try {
+                        const Country = await GetCountryById(City.CountryID)
+                        const Region = await GetNameOfRegion(City.RegionID)
+                        const RegionArray = await GetRegionById(City.RegionID)
+
+                        return { City: { CountryName: Country[0].Country, RegionName: Region[0].Region,...City} }
+                    } catch (error) {
+                        const Country = await GetCountryById(City.CountryID)
+                        return { City: { CountryName: Country[0].Country, ...City }, Region: [] }
+                    }
+                })
+            )
+            .then((data) => {
+                console.log(req.query)
+                const Offset = parseInt(req.query.Offset) || 0
+                const result = data.filter(item => item)
+                const City = result[0].City
+                const Region = result[0].Region
+                console.log(Region.length)
+                res.send({ City })
+            })
         }
 
 
