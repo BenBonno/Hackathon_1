@@ -35,8 +35,8 @@ function Modal(props) {
         >
           <div className="relative">
             <div className="absolute z-50 bg-white rounded-lg shadow w-screen bg-c-ocean">
-              <div className="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                <p>
+              <div className="flex justify-between items-start p-4 rounded-t">
+                <p className="font-HelvetiHand font-bold text-gray-800">
                   {JSON.stringify(props.city.data.attributes.name)}{" "}
                   {Object.values(props.city.included)[0].attributes.name}
                 </p>

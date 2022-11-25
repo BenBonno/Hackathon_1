@@ -284,16 +284,16 @@ function CityCard() {
       <section className="w-3/5 relative">
         <div className="w-full h-full bg-white p-1 absolute rounded-2xl overflow-hidden">
           <div className=" bg-gray-500 w-full h-full">
-            {/* prend le thumb pour les images */}
+            {/* prend le thumb pour les images \v/ exemple liens en bas \v/ */}
             <img
-              className="h-full"
+              className="w-full my-auto"
               src="https://cdn.roadgoat.com/uploads/photo/image/2291/thumb_toa-heftiba-rMjFxuvJlEY-unsplash.jpg"
             />
           </div>
         </div>
         <div className="bg-card-cadre bg-center bg-no-repeat w-full h-full bg-[length:100%_100%] absolute rounded-2xl flex justify-center items-center">
           <h2 className="text-xl font-extrabold uppercase text-white drop-shadow-2xl">
-            {/* Insert Name of city */}City
+            {/* Insert Name of city */}Tokyo
           </h2>
         </div>
       </section>
