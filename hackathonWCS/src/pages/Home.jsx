@@ -17,9 +17,6 @@ function Home() {
       </section>
       <section className="h-screen flex flex-wrap gap-4 justify-center items-center">
         <CityCard />
-        <CityCard />
-        <CityCard />
-        <CityCard />
       </section>
     </div>
   );
