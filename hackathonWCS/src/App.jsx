@@ -1,29 +1,33 @@
 import { useState } from "react";
-import { BrowserRouter, Routes, Route, matchPath, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  matchPath,
+  useLocation,
+} from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import Favorite from "./pages/Favorite";
+import MyList from "./pages/MyList";
 import DataContext from "./contexts/DataContext";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
-import Modal from "./components/Modal"
 
 function App() {
   const [city, setCity] = useState("");
   const [cityList, setCityList] = useState([]);
 
   return (
-    <DataContext.Provider value={{ city, cityList,setCityList}}>
+    <DataContext.Provider value={{ city, cityList, setCityList }}>
       <BrowserRouter>
-        <header className="w-full">
+        <header className="w-full fixed top-0 left-0 right-0 z-50">
           <Header />
         </header>
         <main className="">
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/home" exact element={<Home />} />
-            <Route path="/favorite" exact element={<Favorite />} />
+            <Route path="/list" exact element={<MyList />} />
           </Routes>
         </main>
         {cityList && JSON.stringify(cityList)}
@@ -31,7 +35,7 @@ function App() {
           <Footer />
         </footer>
       </BrowserRouter>
-      </DataContext.Provider>
+    </DataContext.Provider>
   );
 }
 
