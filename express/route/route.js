@@ -148,15 +148,8 @@ route.get('/City/:name', PaysQuery, (req, res) => {
                     console.log(req.query)
                     const Offset = parseInt(req.query.Offset) || 0
                     const result = data.filter(item => item)
-                    const City = result[0].City
-                    const Region = result[0].Region
-                    console.log(Region.length)
-                    if (parseInt(req.query.Limit) >= Region.length || req.query.Limit === undefined) {
-                        res.send({ City, Region })
-                    } else {
 
-                        res.send({ City, Region: Region.slice(Offset, Offset + parseInt(req.query.Limit)) })
-                    }
+                    res.send(data)
                 })
         } else {
             Promise.all(
@@ -173,11 +166,8 @@ route.get('/City/:name', PaysQuery, (req, res) => {
                 })
             )
             .then((data) => {
-                console.log(req.query)
-                const Offset = parseInt(req.query.Offset) || 0
                 const result = data.filter(item => item)
-                const City = result[0].City
-                res.send({ City })
+                res.send(result)
             })
         }
 
