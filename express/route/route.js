@@ -148,7 +148,6 @@ route.get('/City/:name', PaysQuery, (req, res) => {
                     console.log(req.query)
                     const Offset = parseInt(req.query.Offset) || 0
                     const result = data.filter(item => item)
-
                     res.send(data)
                 })
         } else {
