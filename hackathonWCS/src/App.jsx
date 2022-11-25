@@ -7,6 +7,7 @@ import Favorite from "./pages/Favorite";
 import DataContext from "./contexts/DataContext";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
+import Modal from "./components/Modal"
 
 function App() {
   const [city, setCity] = useState("");
