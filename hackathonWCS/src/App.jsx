@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import MyList from "./pages/MyList";
+import Modal from "./components/Modal";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
     <BrowserRouter>
       <header className="w-full fixed top-0 left-0 right-0 z-50">
         <Header />
+        <Modal />
       </header>
       <main className="">
         <Routes>
