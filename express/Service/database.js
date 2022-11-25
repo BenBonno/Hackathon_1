@@ -37,6 +37,18 @@ async function  GetCityByName(str){
          });
     });
 }
+async function  GetCityById(ID){
+    const Id = parseInt(ID)
+    return new Promise(function(resolve,reject){
+        db.all(`SELECT * FROM cities where CityId = ${Id}`, function(err,rows){
+           if(err || rows.length==0){return reject(err);}
+           resolve(rows);
+         });
+    });
+}
+
+
+
 
 
 
@@ -62,4 +74,4 @@ async function  GetCityGeoDistance(GeoLim="1",{lat,lng},Limit=100 ,OFFSET=0,Deg)
 
 
 
-module.exports={db,GetCountryById,GetRegionById,GetCityByName,GetNameOfRegion,GetCityGeoDistance};
+module.exports={db,GetCityById,GetCountryById,GetRegionById,GetCityByName,GetNameOfRegion,GetCityGeoDistance};

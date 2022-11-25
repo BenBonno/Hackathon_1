@@ -6,7 +6,7 @@ const route = express()
 route.use(cors({
     origin: '*'
 }))
-const { GetCountryById, GetRegionById, GetCityByName, GetNameOfRegion,GetCityGeoDistance} = require('../Service/database')
+const { GetCityById, GetCountryById, GetRegionById, GetCityByName, GetNameOfRegion,GetCityGeoDistance} = require('../Service/database')
 
 
 route.get('/', (req, res) => {
@@ -113,7 +113,6 @@ function PaysQuery(req, res, next) {
             })
     } 
     
-    
     else {
         next();
     }
@@ -122,6 +121,36 @@ function PaysQuery(req, res, next) {
 route.get('/City/:name', PaysQuery, (req, res) => {
     console.log(req.params.name, req.query)
     GetCityByName(req.params.name).then(async (response) => {
+            Promise.all(
+                response.map(async (City) => {
+                    try {
+                        const Country = await GetCountryById(City.CountryID)
+                        const Region = await GetNameOfRegion(City.RegionID)
+                    return { CountryName: Country[0].Country,RegionName:Region[0].Region, ...City }
+                    } catch (error) {
+                        const Country = await GetCountryById(City.CountryID)
+                    return { CountryName: Country[0].Country, ...City }
+                    }
+                })
+            )
+                .then((data) => {
+                    const Offset = parseInt(req.query.Offset)||0
+                    const result = data.filter(item => item)
+                            if(parseInt(req.query.Limit) >= result.length || req.query.Limit === undefined){
+                                res.send(result)
+                            }else{
+                                res.send(result.slice(Offset,Offset+parseInt(req.query.Limit)))
+                            }
+                })
+    
+        }).catch(()=>{
+            res.status(404).json({ Error: 'No City as this Name' })
+        })
+    }
+  
+)
+route.get('/CityById/:id',(req, res)=>{
+    GetCityById(req.params.id).then(async (response) => {
         Promise.all(
             response.map(async (City) => {
                 try {
@@ -145,10 +174,9 @@ route.get('/City/:name', PaysQuery, (req, res) => {
             })
 
     }).catch(()=>{
-        res.status(404).json({ Error: 'No City as this Name' })
+        res.status(404).json({ Error: 'No City as this ID' })
     })
 })
-
 
 
 
