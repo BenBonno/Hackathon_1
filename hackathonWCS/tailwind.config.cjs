@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-  theme: {détails
+  theme: {
     extend: {
       backgroundImage: {
         "ocean-theme": "url('/src/assets/bg-footer.jpg')",

@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import Rating from "./Rating";
 import ThumbLogo from "../assets/trombone.svg";
+import Modal from "../components/Modal";
 
 function CityCard() {
+  useEffect(() => {}, []);
   return (
     <div className="w-11/12 h-30 bg-white flex border-2 border-c-oasis rounded-2xl">
       <section className="w-3/5 relative">
@@ -21,7 +23,7 @@ function CityCard() {
             <img className="w-6 h-6" src={ThumbLogo} alt="thumbtack input" />
           </button>
         </div>
-        <div className="flex-1">
+        <div>
           <Rating rating={10} />
         </div>
         <div className="py-4 font-medium text-gray-800">
@@ -29,12 +31,9 @@ function CityCard() {
           <p>Distance : {/* distance data */}</p>
           <p>Budget : {/* budget data */}</p>
         </div>
-        <button
-          type="button"
-          className="w-full px-0.5 py-1 font-medium text-white focus:outline-none bg-c-oasis rounded-full border-2 hover:bg-btn-oasis-1"
-        >
-          Show more
-        </button>
+        <div className="w-full flex justify-end">
+          <Modal />
+        </div>
       </section>
     </div>
   );
