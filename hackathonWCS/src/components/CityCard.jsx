@@ -293,7 +293,7 @@ function CityCard() {
         </div>
         <div className="bg-card-cadre bg-center bg-no-repeat w-full h-full bg-[length:100%_100%] absolute rounded-2xl flex justify-center items-center">
           <h2 className="text-xl font-extrabold uppercase text-white drop-shadow-2xl">
-            {/* Insert Name of city */}Tokyo
+            {/* Insert Name of city */}Rip city
           </h2>
         </div>
       </section>
@@ -304,11 +304,12 @@ function CityCard() {
           </button>
         </div>
         <div>
-          <Rating rating={10} />
+          <Rating rating={temp.data.attributes.average_rating} />
         </div>
         <div className="py-4 font-medium text-gray-800 font-HelvetiHand">
-          <p>Distance : {/* distance data */}</p>
-          <p>Known for : {/* budget data */}</p>
+          <p>{temp.data.attributes.name}</p>
+          <br />
+          <p>{temp.included[0].attributes.name}</p>
         </div>
         <div className="w-full flex justify-end">
           <Modal city={temp} />

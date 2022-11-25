@@ -42,7 +42,7 @@ function Modal(props) {
                 </p>
                 <button
                   type="button"
-                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="text-gray-800 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
                   data-modal-toggle="defaultModal"
                   onClick={handleModal}
                 >
@@ -61,15 +61,15 @@ function Modal(props) {
                   </svg>
                 </button>
               </div>
-              <div className="py-6 px-6 bg-modal-theme bg-[length:100%_100%]">
-                <ul className="divide-y divide-gray-200 dark:divide-red-700">
+              <div className="py-6 px-6 bg-modal-theme bg-[length:100%_100%] font-HelvetiHand">
+                <ul className="divide-y-2 divide-c-oasis">
                   <li className="pb-3 sm:pb-4">
                     <div className="flex items-center space-x-4">
                       <div className="flex-shrink-0">
                         <Population />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm text-gray-500  dark:text-gray-400">
+                        <p className="text-sm text-gray-700  dark:text-gray-400">
                           {props.city.data.attributes.population} persons are
                           living here and will be happy to see you.
                         </p>
@@ -82,12 +82,9 @@ function Modal(props) {
                         <RatingIcon />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                        <p className="text-sm text-gray-700 truncate dark:text-gray-400">
                           Travelers rate this city :{<Rating rating={3} />}
                         </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $3467
                       </div>
                     </div>
                   </li>
@@ -97,7 +94,7 @@ function Modal(props) {
                         <Coronavirus />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                        <p className="text-sm text-gray-700 truncate dark:text-gray-400">
                           {Object.values(
                             props.city.data.attributes.covid
                           )[0].value.toFixed(2)}
@@ -112,7 +109,7 @@ function Modal(props) {
                         <Safety />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                        <p className="text-sm text-gray-700 truncate dark:text-gray-400">
                           Safety rate of {props.city.data.attributes.short_name}{" "}
                           :
                           {
@@ -134,7 +131,7 @@ function Modal(props) {
                         <Price />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm text-gray-500  dark:text-gray-400">
+                        <p className="text-sm text-gray-700  dark:text-gray-400">
                           Budget juged :{" "}
                           {Object.values(
                             props.city.data.attributes.budget
@@ -156,7 +153,7 @@ function Modal(props) {
                         <Links />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm flex-col flex  text-gray-500  truncate dark:text-gray-400">
+                        <p className="text-sm flex-col flex  text-gray-700  truncate dark:text-gray-400">
                           Click me please, don't hesitate :
                           <br />
                           <br />
@@ -164,12 +161,14 @@ function Modal(props) {
                             <a
                               href={props.city.data.attributes.airbnb_url}
                               target="_blank"
+                              className="underline"
                             >
                               AirBnB
                             </a>
                             <a
                               href={props.city.data.attributes.wikipedia_url}
                               target="_blank"
+                              className="underline"
                             >
                               Le plus beau de tous les Kikis
                             </a>
@@ -178,6 +177,7 @@ function Modal(props) {
                                 props.city.data.attributes.kayak_car_rental_url
                               }
                               target="_blank"
+                              className="underline"
                             >
                               Canoe ?
                             </a>
