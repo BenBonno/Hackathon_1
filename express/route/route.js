@@ -151,27 +151,54 @@ route.get('/City/:name', PaysQuery, (req, res) => {
 )
 route.get('/CityById/:id',(req, res)=>{
     GetCityById(req.params.id).then(async (response) => {
-        Promise.all(
-            response.map(async (City) => {
-                try {
-                    const Country = await GetCountryById(City.CountryID)
-                    const Region = await GetNameOfRegion(City.RegionID)
-                return { CountryName: Country[0].Country,RegionName:Region[0].Region, ...City }
-                } catch (error) {
-                    const Country = await GetCountryById(City.CountryID)
-                return { CountryName: Country[0].Country, ...City }
-                }
-            })
-        )
-            .then((data) => {
-                const Offset = parseInt(req.query.Offset)||0
-                const result = data.filter(item => item)
-                        if(parseInt(req.query.Limit) >= result.length || req.query.Limit === undefined){
-                            res.send(result)
-                        }else{
-                            res.send(result.slice(Offset,Offset+parseInt(req.query.Limit)))
-                        }
-            })
+        if(req.query.Region){
+            Promise.all(
+                response.map(async (City) => {
+                    try {
+                        const Country = await GetCountryById(City.CountryID)
+                        const Region = await GetNameOfRegion(City.RegionID)
+                        const RegionArray = await GetRegionById(City.RegionID)
+
+                    return { CountryName: Country[0].Country,RegionName:Region[0].Region, ...City,...RegionArray }
+                    } catch (error) {
+                        const Country = await GetCountryById(City.CountryID)
+                    return { CountryName: Country[0].Country, ...City }
+                    }
+                })
+            )
+                .then((data) => {
+                    const Offset = parseInt(req.query.Offset)||0
+                    const result = data.filter(item => item)
+                            if(parseInt(req.query.Limit) >= result.length || req.query.Limit === undefined){
+                                res.send(result)
+                            }else{
+                                res.send(result.slice(Offset,Offset+parseInt(req.query.Limit)))
+                            }
+                })
+        }else{
+            Promise.all(
+                response.map(async (City) => {
+                    try {
+                        const Country = await GetCountryById(City.CountryID)
+                        const Region = await GetNameOfRegion(City.RegionID)
+                    return { CountryName: Country[0].Country,RegionName:Region[0].Region, ...City }
+                    } catch (error) {
+                        const Country = await GetCountryById(City.CountryID)
+                    return { CountryName: Country[0].Country, ...City }
+                    }
+                })
+            )
+                .then((data) => {
+                    const Offset = parseInt(req.query.Offset)||0
+                    const result = data.filter(item => item)
+                            if(parseInt(req.query.Limit) >= result.length || req.query.Limit === undefined){
+                                res.send(result)
+                            }else{
+                                res.send(result.slice(Offset,Offset+parseInt(req.query.Limit)))
+                            }
+                })
+        }
+        
 
     }).catch(()=>{
         res.status(404).json({ Error: 'No City as this ID' })
