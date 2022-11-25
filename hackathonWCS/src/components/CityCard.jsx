@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import Rating from "./Rating";
 import ThumbLogo from "../assets/trombone.svg";
 import Modal from "../components/Modal";
@@ -278,9 +278,31 @@ const temp = {
   ],
 };
 
-function CityCard() {
-  useEffect(() => {}, []);
-  return (
+function CityCard({city,parent}) {
+  console.log(city,parent)
+    const [DataResult,SetDataResult] = useState()
+      useEffect(() => {
+        if(city){
+        const Country = city.City + "-" + parent.CountryName
+        const config = {
+          method: 'get',
+          url: `https://api.roadgoat.com/api/v2/destinations/${Country.toLowerCase()}`,
+          headers: { 
+            'Authorization': import.meta.env.VITE_Authorization
+          },
+          data : ""
+        };
+        axios(config)
+        .then(function (response) {
+          console.log(response.data)
+          SetDataResult(response.data)
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      }
+  }, []);
+  return DataResult&&(
     <div className="w-11/12 h-30 bg-white flex border-2 border-c-oasis rounded-2xl">
       <section className="w-3/5 relative">
         <div className="w-full h-full bg-white p-1 absolute rounded-2xl overflow-hidden">
@@ -288,7 +310,7 @@ function CityCard() {
         </div>
         <div className="bg-card-cadre bg-center bg-no-repeat w-full h-full bg-[length:100%_100%] absolute rounded-2xl flex justify-center items-center">
           <h2 className="text-xl font-bold uppercase text-c-creamy">
-            {/* Insert Name of city */}City
+            {city.City}
           </h2>
         </div>
       </section>
@@ -299,15 +321,15 @@ function CityCard() {
           </button>
         </div>
         <div>
-          <Rating rating={temp.data.attributes.average_rating} />
+          <Rating rating={DataResult.data.attributes.average_rating} />
         </div>
         <div className="py-4 font-medium text-gray-800">
-          <p>{temp.data.attributes.name}</p>
+          <p>{DataResult.data.attributes.name}</p>
           <br/>
-          <p>{temp.included[0].attributes.name}</p>
+          <p>{DataResult.included[0].attributes.name}</p>
         </div>
         <div className="w-full flex justify-end">
-          <Modal city={temp} />
+          <Modal city={DataResult} />
         </div>
       </section>
     </div>

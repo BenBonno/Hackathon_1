@@ -10,12 +10,13 @@ function Results() {
     return (
       <>
       {   
-      cityList.City && <CityCard city={cityList.City} />}   
+      cityList.City && <CityCard city={cityList.City} parent={cityList.City}/>}   
         {cityList.Region && cityList.Region.map((city) => {
         return (             
           <CityCard
             key={city.CityId}                  
             city={city}
+            parent={cityList.City}
           />          
         );
       })}
