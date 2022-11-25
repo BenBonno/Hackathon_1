@@ -1,8 +1,11 @@
 import React from "react";
-import CityCard from "../components/CityCard";
+import Results from "../components/Results";
 import Search from "../components/Search";
+import DataContext from "../contexts/DataContext";
+import { useContext } from "react";
 
 function Home() {
+  const { cityList} = useContext(DataContext);
   return (
     <div className="bg-c-creamy h-fit">
       <section className="flex justify-center items-center flex-col h-screen bg-home-theme bg-top bg-no-repeat bg-[length:100%_100%] gap-y-5">
@@ -16,12 +19,7 @@ function Home() {
         </div>
       </section>
       <section className="h-fit flex flex-wrap gap-4 justify-center items-center">
-        <CityCard />
-        <CityCard />
-        <CityCard />
-        <CityCard />
-        <CityCard />
-        <CityCard />
+      {cityList && <Results />}
       </section>
     </div>
   );
