@@ -69,10 +69,11 @@ function Search() {
             response.data.length === 1 &&
             response.data[0].City !== undefined
           ) {
-            console.log(response.data[0].RegionID);
-            axios(configRegion(response.data[0].RegionID))
+            console.log("c'est ça que tu cherche ", response.data);
+            // axios(configRegion(response.data[0].City.RegionID))
+            axios(configCityId(response.data[0].City.CityId))
               .then(function (response2) {
-                console.log("Region result: " + response2.data);
+                console.log("Region result: ", response2.data);
                 // setRegionResult(response2.data);
                 setCityList(response2.data);
               })
@@ -94,10 +95,10 @@ function Search() {
     if (typeof citySearch === "number") {
       axios(configCityId(citySearch.toString()))
         .then(function (response) {
-          console.log(response.data);
+          console.log("Region par CityId", response.data);
 
           // setSearchResult(response.data);
-          console.log(response.data);
+          console.log("2 ieme cityList de Search" + response.data.Region);
           setCityList(response.data);
         })
 
@@ -153,7 +154,7 @@ function Search() {
             </button>
           </div>
         </form>
-        <div className="absolute h-fit bg-white mx-auto w-8/12 rounded-xl mt-4">
+        <div className="h-fit bg-white mx-auto w-9/12 rounded-xl mt-4 flex flex-col px-4 font-HelvetiHand">
           {manyResults.length > 0 && (
             <p className="text-center font-bold text-gray-600">
               need more precision :
@@ -163,15 +164,15 @@ function Search() {
             manyResults.map((choice) => {
               return (
                 <button
-                  className="rounded-lg w-full hover:bg-btn-oasis-1 hover:text-white font-medium py-2 ease-in duration-200"
-                  key={choice.CityId}
+                  key={choice.City.CityId}
                   onClick={() => {
-                    setCitySearch(choice.CityId);
+                    setCitySearch(choice.City.CityId);
                   }}
+                  className="hover:bg-btn-oasis-1 rounded-xl"
                 >
                   {" "}
-                  City {choice.City} / Country: {choice.CountryName} / Region{" "}
-                  {choice.RegionName}
+                  Ville {choice.City.City} / Pays: {choice.City.CountryName} /
+                  Region {choice.City.RegionName}
                 </button>
               );
             })}
