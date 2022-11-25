@@ -1,34 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { useState } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  matchPath,
+  useLocation,
+} from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import MyList from "./pages/MyList";
+import DataContext from "./contexts/DataContext";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [city, setCity] = useState("");
+  const [cityList, setCityList] = useState([]);
+  console.log(cityList);
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+    <DataContext.Provider value={{ city, cityList, setCityList }}>
+      <BrowserRouter>
+        <header className="w-full fixed top-0 left-0 right-0 z-50">
+          <Header />
+        </header>
+        <main className="">
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/home" exact element={<Home />} />
+            <Route path="/list" exact element={<MyList />} />
+          </Routes>
+        </main>
+        <footer className="">
+          <Footer />
+        </footer>
+      </BrowserRouter>
+    </DataContext.Provider>
+  );
 }
 
-export default App
+export default App;
