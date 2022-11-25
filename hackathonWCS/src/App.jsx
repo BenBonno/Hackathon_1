@@ -13,7 +13,7 @@ function App() {
   const [cityList, setCityList] = useState([]);
 
   return (
-    <DataContext.Provider value={{ city, cityList}}>
+    <DataContext.Provider value={{ city, cityList,setCityList}}>
       <BrowserRouter>
         <header className="w-full">
           <Header />
@@ -25,6 +25,7 @@ function App() {
             <Route path="/favorite" exact element={<Favorite />} />
           </Routes>
         </main>
+        {cityList && JSON.stringify(cityList)}
         <footer className="">
           <Footer />
         </footer>
