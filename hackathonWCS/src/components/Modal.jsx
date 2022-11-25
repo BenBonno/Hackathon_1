@@ -116,7 +116,7 @@ function Modal(props) {
                           Safety rate of {props.city.data.attributes.short_name}{" "}
                           :
                           {
-                            <RatingSafe
+                            <Rating
                               rating={
                                 Object.values(
                                   props.city.data.attributes.safety
