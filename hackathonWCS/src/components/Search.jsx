@@ -92,11 +92,11 @@ const configCity = ((citySearch) =>{
     if (typeof citySearch === "number"){
       axios(configCityId(citySearch.toString()))
       .then(function (response) {
-       console.log(response.data);
+       console.log("Region par CityId",response.data);
 
         // setSearchResult(response.data);
-        console.log(response.data);
-        setCityList(response.data);        
+        console.log("2 ieme cityList de Search"+response.data.Region);
+        setCityList(response.data.Region);        
       }) 
 
       .catch(function (error) {
