@@ -18,7 +18,7 @@ function Modal(props) {
   return (
     <>
       <button
-        className="block text-white bg-c-ocean border-btn-ocean-1 border-4 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-1.5 text-center"
+        className=" font-HelvetiHand block text-white bg-c-ocean border-btn-ocean-1 border-4 hover:bg-blue-800 font-medium rounded-full text-sm px-4 py-1.5 text-center"
         type="button"
         data-modal-toggle="defaultModal"
         onClick={handleModal}
@@ -34,7 +34,7 @@ function Modal(props) {
           className="bg-black bg-opacity-50 backdrop-blur-sm overflow-y-auto fixed top-0 left-0 right-0 z-50 w-full h-full justify-center pt-10"
         >
           <div className="relative">
-            <div className="absolute z-50 bg-white rounded-lg shadow w-screen">
+            <div className="absolute z-50 bg-white rounded-lg shadow w-screen bg-c-ocean">
               <div className="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
                 <p>
                   {JSON.stringify(props.city.data.attributes.name)}{" "}

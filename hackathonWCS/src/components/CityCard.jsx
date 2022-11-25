@@ -286,13 +286,13 @@ function CityCard() {
           <div className=" bg-gray-500 w-full h-full">
             {/* prend le thumb pour les images */}
             <img
-              className="w-full"
+              className="h-full"
               src="https://cdn.roadgoat.com/uploads/photo/image/2291/thumb_toa-heftiba-rMjFxuvJlEY-unsplash.jpg"
             />
           </div>
         </div>
         <div className="bg-card-cadre bg-center bg-no-repeat w-full h-full bg-[length:100%_100%] absolute rounded-2xl flex justify-center items-center">
-          <h2 className="text-xl font-extrabold uppercase text-btn-ocean-1 drop-shadow-2xl">
+          <h2 className="text-xl font-extrabold uppercase text-white drop-shadow-2xl">
             {/* Insert Name of city */}City
           </h2>
         </div>
@@ -306,7 +306,7 @@ function CityCard() {
         <div>
           <Rating rating={10} />
         </div>
-        <div className="py-4 font-medium text-gray-800">
+        <div className="py-4 font-medium text-gray-800 font-HelvetiHand">
           <p>Distance : {/* distance data */}</p>
           <p>Known for : {/* budget data */}</p>
         </div>

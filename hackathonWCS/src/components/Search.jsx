@@ -138,7 +138,7 @@ function Search() {
             <input
               type="search"
               id="default-search"
-              className="block w-full p-4 pl-10 text-sm text-gray-900 border-2 border-c-oasis rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+              className="font-HelvetiHand block w-full p-4 pl-10 text-sm text-gray-900 border-2 border-c-oasis rounded-full bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter your city "
               value={inputSearch}
               onChange={(event) => setInputSearch(event.target.value)}
