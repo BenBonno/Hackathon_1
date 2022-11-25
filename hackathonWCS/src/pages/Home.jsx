@@ -1,5 +1,4 @@
 import React from "react";
-import CityCard from "../components/CityCard";
 import Results from "../components/Results";
 import Search from "../components/Search";
 import DataContext from "../contexts/DataContext";
@@ -20,7 +19,7 @@ function Home() {
         </div>
       </section>
       <section className="h-fit flex flex-wrap gap-4 justify-center items-center">
-      {cityList.length > 0 && <Results />}
+      {cityList && <Results />}
       </section>
     </div>
   );

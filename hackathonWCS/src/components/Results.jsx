@@ -6,17 +6,20 @@ import CityCard from "../components/CityCard";
 
 function Results() {
     const {cityList} = useContext(DataContext);
-    console.log("voici cityList[0]: ", cityList[0].City)
+    console.log("voici cityList dans Result: ", cityList);
     return (
-
-        cityList && cityList.map((city) => {
+      <>
+      {   
+      cityList.City && <CityCard city={cityList.City} />}   
+        {cityList.Region && cityList.Region.map((city) => {
         return (             
           <CityCard
             key={city.CityId}                  
             city={city}
           />          
         );
-      }) 
+      })}
+      </> 
     );
 }
 

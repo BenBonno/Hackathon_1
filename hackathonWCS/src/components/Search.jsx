@@ -69,10 +69,11 @@ const configCity = ((citySearch) =>{
         console.log(response.data[0].City);
         //2ieme requete axios---
         if (response.data.length===1 && response.data[0].City !== undefined)  { 
-          console.log(response.data[0].RegionID);
-          axios(configRegion(response.data[0].RegionID))
+          console.log("c'est ça que tu cherche ",response.data);
+          // axios(configRegion(response.data[0].City.RegionID))
+          axios(configCityId(response.data[0].City.CityId))
           .then(function (response2) {
-            console.log("Region result: "+response2.data);
+            console.log("Region result: ",response2.data);
             // setRegionResult(response2.data);
             setCityList(response2.data);
           })
@@ -96,7 +97,7 @@ const configCity = ((citySearch) =>{
 
         // setSearchResult(response.data);
         console.log("2 ieme cityList de Search"+response.data.Region);
-        setCityList(response.data.Region);        
+        setCityList(response.data);        
       }) 
 
       .catch(function (error) {
@@ -122,10 +123,10 @@ const configCity = ((citySearch) =>{
       {manyResults && manyResults.map((choice) => {
               return (
                 <button
-                  key={choice.CityId}                  
+                  key={choice.City.CityId}                  
                 onClick={() => {
-                  setCitySearch(choice.CityId);
-                }}> Ville {choice.City} / Pays: {choice.CountryName} / Region {choice.RegionName}</button>
+                  setCitySearch(choice.City.CityId);
+                }}> Ville {choice.City.City} / Pays: {choice.City.CountryName} / Region {choice.City.RegionName}</button>
               );
             })}    
     </div>    
