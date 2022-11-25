@@ -9,7 +9,6 @@ import {
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
-import Details from "./pages/Details";
 import MyList from "./pages/MyList";
 import "./App.css";
 
@@ -23,7 +22,6 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/home" exact element={<Home />} />
-          <Route path="/:id" exact element={<Details />} />
           <Route path="/list" exact element={<MyList />} />
         </Routes>
       </main>

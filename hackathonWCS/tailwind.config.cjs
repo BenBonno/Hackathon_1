@@ -8,6 +8,7 @@ module.exports = {
         "home-theme": "url('/src/assets/bg-home-section.jpg')",
         "cadre-detail": "url('/src/assets/cadre-img-detail.png')",
         "section-theme": "url('/src/assets/bg-section-to-page.webp')",
+        "card-cadre": "url('/src/assets/bg-card-image.png')",
       },
       colors: {
         /* btn color */
