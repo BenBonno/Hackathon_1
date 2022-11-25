@@ -299,12 +299,12 @@ function CityCard() {
           </button>
         </div>
         <div>
-          <Rating rating={10} />
+          <Rating rating={temp.data.attributes.average_rating} />
         </div>
         <div className="py-4 font-medium text-gray-800">
-          <p>Safety : {/* lvl safety data */}</p>
-          <p>Distance : {/* distance data */}</p>
-          <p>Budget : {/* budget data */}</p>
+          <p>{temp.data.attributes.name}</p>
+          <br/>
+          <p>{temp.included[0].attributes.name}</p>
         </div>
         <div className="w-full flex justify-end">
           <Modal city={temp} />
