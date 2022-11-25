@@ -7,10 +7,10 @@ function Header() {
       <div className="m-1">
         <img className="w-12" src={logoSite} alt="website logo" />
       </div>
-      <h1 className="m-1 text-white font-bold">CheckOo</h1>
+      <h1 className="m-1 text-white font-bold font-HelvetiHand">CheckOo</h1>
       <button
         type="button"
-        className="m-1 py-1.5 px-5 text-sm font-medium text-white focus:outline-none bg-c-oasis rounded-full border-2 hover:bg-btn-oasis-1"
+        className="font-HelvetiHand m-1 py-1.5 px-5 text-sm font-medium text-white focus:outline-none bg-c-oasis rounded-full border-2 hover:bg-btn-oasis-1"
       >
         My List
       </button>

@@ -279,15 +279,20 @@ const temp = {
 };
 
 function CityCard() {
-  useEffect(() => {}, []);
   return (
     <div className="w-11/12 h-30 bg-white flex border-2 border-c-oasis rounded-2xl">
       <section className="w-3/5 relative">
         <div className="w-full h-full bg-white p-1 absolute rounded-2xl overflow-hidden">
-          <div className=" bg-gray-500 w-full h-full"></div>
+          <div className=" bg-gray-500 w-full h-full">
+            {/* prend le thumb pour les images */}
+            <img
+              className="w-full"
+              src="https://cdn.roadgoat.com/uploads/photo/image/2291/thumb_toa-heftiba-rMjFxuvJlEY-unsplash.jpg"
+            />
+          </div>
         </div>
         <div className="bg-card-cadre bg-center bg-no-repeat w-full h-full bg-[length:100%_100%] absolute rounded-2xl flex justify-center items-center">
-          <h2 className="text-xl font-bold uppercase text-c-creamy">
+          <h2 className="text-xl font-extrabold uppercase text-btn-ocean-1 drop-shadow-2xl">
             {/* Insert Name of city */}City
           </h2>
         </div>
@@ -302,9 +307,8 @@ function CityCard() {
           <Rating rating={10} />
         </div>
         <div className="py-4 font-medium text-gray-800">
-          <p>Safety : {/* lvl safety data */}</p>
           <p>Distance : {/* distance data */}</p>
-          <p>Budget : {/* budget data */}</p>
+          <p>Known for : {/* budget data */}</p>
         </div>
         <div className="w-full flex justify-end">
           <Modal city={temp} />

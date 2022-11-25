@@ -4,7 +4,7 @@ import logoWcs from "../assets/wcs.png";
 function Footer() {
   return (
     <div className="flex flex-col justify-end w-full bg-ocean-theme bg-cover bg-top bg-no-repeat">
-      <section className="flex flex-wrap justify-center text-center text-gray-600 font-bold py-4">
+      <section className="flex flex-wrap justify-center text-center text-gray-600 font-bold py-4 font-HelvetiHand">
         <h2 className="w-full text-3xl text-c-ocean mb-28">Team Dev :</h2>
         <p className="w-1/2">Benoit</p>
         <p className="w-1/2">Thomas</p>

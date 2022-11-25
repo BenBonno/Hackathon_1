@@ -146,14 +146,14 @@ function Search() {
             />
             <button
               type="input"
-              className="text-white absolute right-2.5 bottom-2.5 bg-c-oasis hover:bg-btn-oasis focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2"
+              className="text-white absolute right-2.5 bottom-2.5 bg-c-oasis hover:bg-btn-oasis focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm px-4 py-2 font-HelvetiHand"
               onClick={(e) => clickSearchButton(inputSearch, e)}
             >
               Search
             </button>
           </div>
         </form>
-        <div className="absolute bg-white mx-auto w-8/12 rounded-xl mt-4">
+        <div className="absolute h-fit bg-white mx-auto w-8/12 rounded-xl mt-4">
           {manyResults.length > 0 && (
             <p className="text-center font-bold text-gray-600">
               need more precision :
