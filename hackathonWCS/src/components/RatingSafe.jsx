@@ -2,7 +2,7 @@ import React from "react";
 
 function Rating({ rating }) {
   function howManyStars(ratingNumber) {
-    const fullStars = Math.ceil(ratingNumber);
+    const fullStars = Math.ceil(ratingNumber)*0.5;
     const starsArray = [];
     for (let i = 0; i < 5; i += 1) {
       if (i < fullStars) {

@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import covid from "../assets/covidLogo.svg";
 import Coronavirus from "./icons/Coronavirus";
 import Population from "./icons/Population";
 import RatingIcon from "./icons/RatingIcon";
 import Price from "./icons/Price";
 import Safety from "./icons/Safety";
+import Links from "./icons/Links";
+import Rating from "./Rating";
+import RatingSafe from "./RatingSafe";
 
-function Modal() {
+function Modal(props) {
   const [modalOpen, setModalOpen] = useState(false);
 
   function handleModal() {
     setModalOpen(!modalOpen);
   }
-
   return (
     <>
       <button
@@ -34,8 +36,10 @@ function Modal() {
           <div className="relative">
             <div className="absolute z-50 bg-white rounded-lg shadow w-screen">
               <div className="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
-                <img src={covid} alt="picture of the city" />
-
+                <p>
+                  {JSON.stringify(props.city.data.attributes.name)}{" "}
+                  {Object.values(props.city.included)[0].attributes.name}
+                </p>
                 <button
                   type="button"
                   className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -55,7 +59,6 @@ function Modal() {
                       clipRule="evenodd"
                     ></path>
                   </svg>
-                  <span className="sr-only">Close modal</span>
                 </button>
               </div>
               <div className="py-6 px-6">
@@ -66,15 +69,10 @@ function Modal() {
                         <Population />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Population
+                        <p className="text-sm text-gray-500  dark:text-gray-400">
+                          {props.city.data.attributes.population} persons are
+                          living here and will be happy to see you.
                         </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          on peut supprimer ca si pas besoin
-                        </p>
-                      </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-                        $320
                       </div>
                     </div>
                   </li>
@@ -84,11 +82,8 @@ function Modal() {
                         <RatingIcon />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Rating
-                        </p>
                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          on peut supprimer ca si pas besoin
+                          Travelers rate this city :{<Rating rating={3} />}
                         </p>
                       </div>
                       <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
@@ -102,15 +97,13 @@ function Modal() {
                         <Coronavirus />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Covidou
-                        </p>
                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          on peut supprimer ca si pas besoin
+                          {Object.values(
+                            props.city.data.attributes.covid
+                          )[0].value.toFixed(2)}
+                          % of population had SARS-CoV-2
                         </p>
                       </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white" />
-                      $67
                     </div>
                   </li>
                   <li className="py-3 sm:py-4">
@@ -119,15 +112,20 @@ function Modal() {
                         <Safety />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Safety
-                        </p>
                         <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          on peut supprimer ca si pas besoin
+                          Safety rate of {props.city.data.attributes.short_name}{" "}
+                          :
+                          {
+                            <RatingSafe
+                              rating={
+                                Object.values(
+                                  props.city.data.attributes.safety
+                                )[0].value
+                              }
+                            />
+                          }
                         </p>
                       </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white" />
-                      $2367
                     </div>
                   </li>
                   <li className="pt-3 pb-0 sm:pt-4">
@@ -136,15 +134,56 @@ function Modal() {
                         <Price />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                          Price
-                        </p>
-                        <p className="text-sm text-gray-500 truncate dark:text-gray-400">
-                          on peut supprimer ca si pas besoin
+                        <p className="text-sm text-gray-500  dark:text-gray-400">
+                          Budget juged :{" "}
+                          {Object.values(
+                            props.city.data.attributes.budget
+                          )[0].subText.toLowerCase()}
+                          <RatingSafe
+                            rating={
+                              Object.values(
+                                props.city.data.attributes.budget
+                              )[0].value
+                            }
+                          />
                         </p>
                       </div>
-                      <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white" />
-                      $367
+                    </div>
+                  </li>
+                  <li className="pt-3 pb-0 sm:pt-4">
+                    <div className="flex items-center space-x-4">
+                      <div className="flex-shrink-0">
+                        <Links />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm flex-col flex  text-gray-500  truncate dark:text-gray-400">
+                          Click me please, don't hesitate :
+                          <br />
+                          <br />
+                          <div className="flex flex-col gap-2">
+                            <a
+                              href={props.city.data.attributes.airbnb_url}
+                              target="_blank"
+                            >
+                              AirBnB
+                            </a>
+                            <a
+                              href={props.city.data.attributes.wikipedia_url}
+                              target="_blank"
+                            >
+                              Le plus beau de tous les Kikis
+                            </a>
+                            <a
+                              href={
+                                props.city.data.attributes.kayak_car_rental_url
+                              }
+                              target="_blank"
+                            >
+                              Canoe ?
+                            </a>
+                          </div>
+                        </p>
+                      </div>
                     </div>
                   </li>
                 </ul>

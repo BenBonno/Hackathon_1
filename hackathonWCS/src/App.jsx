@@ -30,7 +30,7 @@ function App() {
             <Route path="/list" exact element={<MyList />} />
           </Routes>
         </main>
-        {cityList && JSON.stringify(cityList)}
+        {/* {cityList && JSON.stringify(cityList)} */}
         <footer className="">
           <Footer />
         </footer>
