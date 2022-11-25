@@ -23,15 +23,14 @@ function App() {
         <header className="w-full fixed top-0 left-0 right-0 z-50">
           <Header />
         </header>
-        <main className="">
+        <main className="bg-c-creamy">
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/home" exact element={<Home />} />
             <Route path="/list" exact element={<MyList />} />
           </Routes>
         </main>
-        {cityList && JSON.stringify(cityList)}
-        <footer className="">
+        <footer>
           <Footer />
         </footer>
       </BrowserRouter>

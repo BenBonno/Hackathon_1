@@ -3,12 +3,16 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        HelvetiHand: ["HelvetiHand", "cursive"],
+      },
       backgroundImage: {
         "ocean-theme": "url('/src/assets/bg-footer.jpg')",
         "home-theme": "url('/src/assets/bg-home-section.jpg')",
         "cadre-detail": "url('/src/assets/cadre-img-detail.png')",
         "section-theme": "url('/src/assets/bg-section-to-page.webp')",
         "card-cadre": "url('/src/assets/bg-card-image.png')",
+        "modal-theme": "url('/src/assets/bg-modal.png')",
       },
       colors: {
         /* btn color */
