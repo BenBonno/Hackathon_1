@@ -14,6 +14,7 @@ route.get('/', (req, res) => {
 })
 
 route.get('/Country/:id', (req, res) => {
+    console.log(req.params.name, req.query)
     const CountryId = parseInt(req.params.id);
     console.log(CountryId)
     GetCountryById(CountryId).then((response) => {
@@ -25,7 +26,7 @@ route.get('/Country/:id', (req, res) => {
 
 route.get('/Region/:id', (req, res) => {
     const RegionID = req.params.id;
-    console.log(req.query)
+    console.log(req.params.name, req.query)
     const Offset = parseInt(req.query.Offset) ||0;
     const Limit = parseInt(req.query.Limit) ||0;
     
@@ -68,6 +69,7 @@ route.get('/Region/:id', (req, res) => {
 
 function PaysQuery(req, res, next) {
     if (req.query.Pays) {
+        console.log(req.params.name, req.query)
         GetCityByName(req.params.name)
             .then((response) => {
                 Promise.all(
@@ -118,12 +120,18 @@ function PaysQuery(req, res, next) {
 }
 
 route.get('/City/:name', PaysQuery, (req, res) => {
-    console.log(req.query)
+    console.log(req.params.name, req.query)
     GetCityByName(req.params.name).then(async (response) => {
         Promise.all(
             response.map(async (City) => {
-                const Country = await GetCountryById(City.CountryID)
+                try {
+                    const Country = await GetCountryById(City.CountryID)
+                    const Region = await GetNameOfRegion(City.RegionID)
+                return { CountryName: Country[0].Country,RegionName:Region[0].Region, ...City }
+                } catch (error) {
+                    const Country = await GetCountryById(City.CountryID)
                 return { CountryName: Country[0].Country, ...City }
+                }
             })
         )
             .then((data) => {
