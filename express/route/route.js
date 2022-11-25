@@ -159,20 +159,25 @@ route.get('/CityById/:id',(req, res)=>{
                         const Region = await GetNameOfRegion(City.RegionID)
                         const RegionArray = await GetRegionById(City.RegionID)
 
-                    return { CountryName: Country[0].Country,RegionName:Region[0].Region, ...City,...RegionArray }
+                    return {City:{ CountryName: Country[0].Country,RegionName:Region[0].Region, ...City }, Region:RegionArray}
                     } catch (error) {
                         const Country = await GetCountryById(City.CountryID)
-                    return { CountryName: Country[0].Country, ...City }
+                    return {City:{ CountryName: Country[0].Country, ...City },Region:[]}
                     }
                 })
             )
                 .then((data) => {
+                    console.log(req.query)
                     const Offset = parseInt(req.query.Offset)||0
                     const result = data.filter(item => item)
-                            if(parseInt(req.query.Limit) >= result.length || req.query.Limit === undefined){
-                                res.send(result)
+                    const City = result[0].City
+                    const Region = result[0].Region
+                    console.log(Region.length)
+                            if(parseInt(req.query.Limit) >= Region.length || req.query.Limit === undefined){
+                                res.send({City,Region})
                             }else{
-                                res.send(result.slice(Offset,Offset+parseInt(req.query.Limit)))
+                                
+                                res.send({City,Region:Region.slice(Offset,Offset+parseInt(req.query.Limit))})
                             }
                 })
         }else{
