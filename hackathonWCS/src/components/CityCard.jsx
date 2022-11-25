@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import Rating from "./Rating";
 import ThumbLogo from "../assets/trombone.svg";
 import Modal from "../components/Modal";
@@ -278,61 +278,69 @@ const temp = {
   ],
 };
 
-function CityCard({city,parent}) {
-  console.log(city,parent)
-    const [DataResult,SetDataResult] = useState()
-      useEffect(() => {
-        if(city){
-        const Country = city.City + "-" + parent.CountryName
-        const config = {
-          method: 'get',
-          url: `https://api.roadgoat.com/api/v2/destinations/${Country.toLowerCase()}`,
-          headers: { 
-            'Authorization': import.meta.env.VITE_Authorization
-          },
-          data : ""
-        };
-        axios(config)
+function CityCard({ city, parent }) {
+  console.log(city, parent);
+  const [DataResult, SetDataResult] = useState();
+  useEffect(() => {
+    if (city) {
+      const Country = city.City + "-" + parent.CountryName;
+      const config = {
+        method: "get",
+        url: `https://api.roadgoat.com/api/v2/destinations/${Country.toLowerCase()}`,
+        headers: {
+          Authorization: import.meta.env.VITE_Authorization,
+        },
+        data: "",
+      };
+      axios(config)
         .then(function (response) {
-          console.log(response.data)
-          SetDataResult(response.data)
+          console.log(response.data);
+          SetDataResult(response.data);
         })
         .catch(function (error) {
           console.log(error);
         });
-      }
+    }
   }, []);
-  return DataResult&&(
-    <div className="w-11/12 h-30 bg-white flex border-2 border-c-oasis rounded-2xl">
-      <section className="w-3/5 relative">
-        <div className="w-full h-full bg-white p-1 absolute rounded-2xl overflow-hidden">
-          <div className=" bg-gray-500 w-full h-full"></div>
-        </div>
-        <div className="bg-card-cadre bg-center bg-no-repeat w-full h-full bg-[length:100%_100%] absolute rounded-2xl flex justify-center items-center">
-          <h2 className="text-xl font-bold uppercase text-c-creamy">
-            {city.City}
-          </h2>
-        </div>
-      </section>
-      <section className="w-1/3 text-sm h-full mx-auto py-2">
-        <div className="w-full flex justify-end">
-          <button className="">
-            <img className="w-6 h-6" src={ThumbLogo} alt="thumbtack input" />
-          </button>
-        </div>
-        <div>
-          <Rating rating={DataResult.data.attributes.average_rating} />
-        </div>
-        <div className="py-4 font-medium text-gray-800">
-          <p>{DataResult.data.attributes.name}</p>
-          <br/>
-          <p>{DataResult.included[0].attributes.name}</p>
-        </div>
-        <div className="w-full flex justify-end">
-          <Modal city={DataResult} />
-        </div>
-      </section>
-    </div>
+  return (
+    DataResult && (
+      <div className="w-11/12 h-30 bg-white flex border-2 border-c-oasis rounded-2xl">
+        <section className="w-3/5 relative">
+          <div className="w-full h-full bg-white p-1 absolute rounded-2xl overflow-hidden">
+            <div className=" bg-gray-500 w-full h-full">
+              {/* prend le thumb pour les images \v/ exemple liens en bas \v/ */}
+              <img
+                className="w-full my-auto"
+                src="https://cdn.roadgoat.com/uploads/photo/image/2291/thumb_toa-heftiba-rMjFxuvJlEY-unsplash.jpg"
+              />
+            </div>
+          </div>
+          <div className="bg-card-cadre bg-center bg-no-repeat w-full h-full bg-[length:100%_100%] absolute rounded-2xl flex justify-center items-center">
+            <h2 className="text-xl font-extrabold uppercase text-white drop-shadow-2xl">
+              {city.City}
+            </h2>
+          </div>
+        </section>
+        <section className="w-1/3 text-sm h-full mx-auto py-2">
+          <div className="w-full flex justify-end">
+            <button className="">
+              <img className="w-6 h-6" src={ThumbLogo} alt="thumbtack input" />
+            </button>
+          </div>
+          <div>
+            <Rating rating={DataResult.data.attributes.average_rating} />
+          </div>
+          <div className="py-4 font-medium text-gray-800 font-HelvetiHand">
+            <p>{DataResult.data.attributes.name}</p>
+            <br />
+            <p>{DataResult.included[0].attributes.name}</p>
+          </div>
+          <div className="w-full flex justify-end">
+            <Modal city={DataResult} />
+          </div>
+        </section>
+      </div>
+    )
   );
 }
 
